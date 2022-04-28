@@ -56,7 +56,7 @@ function RegistroEndereco(){
 }
 
 
-// calcular data até aniversário
+// Calculo de data até aniversário
 
 function formatDate (date) {
     return date.replace(/(\d{2})\/(\d{2})\/(\d{4})/, '$2/$1/$3')
@@ -107,7 +107,7 @@ function CalculaIdade(bornday){
 
     return days_until = days
 }
-// Juntar Cadastro
+// Fechar Cadastro
 
 function Cadastro(){
 
@@ -134,20 +134,18 @@ function Cadastro(){
         sessionStorage.setItem("diffDays",`${days_until}`);
 
     //Envio De Dados HTML
-        
-        document.querySelector('#output-name').innerHTML = outputName
-        document.querySelector('#output-cpf').innerHTML = outputCpf
-        document.querySelector('#output-birthdate').innerHTML = outputBirthdate
-        document.querySelector('#output-cep').innerHTML = outputCep
-        document.querySelector('#output-adress').innerHTML = outputAdress
-        document.querySelector('#output-number').innerHTML = outputNumber
-        document.querySelector('#output-district').innerHTML = outputDistrict
-        document.querySelector('#output-days-until').innerHTML = days_until
-
+        document.getElementById('output-name').value = outputName
+        document.getElementById('output-cpf').value = outputCpf
+        document.getElementById('output-birthdate').value = outputBirthdate
+        document.getElementById('output-cep').value = outputCep
+        document.getElementById('output-adress').value = outputAdress
+        document.getElementById('output-number').value = outputNumber
+        document.getElementById('output-district').value = outputDistrict
+        document.getElementById('output-days-until').value = days_until
     
 }
 
-// Habilitar botao proximo quando campo nao vazio
+// Habilitar botao proximo quando campo nao estiver vazio
 
 function success1() {
 
@@ -166,9 +164,9 @@ function success2() {
        }
    }
 
-//verifica CEP, API Via CEP
+//Verifica CEP, API Via CEP
 
-function limpa_formulário_cep() {
+function limpa_formulario_cep() {
     //Limpa valores do formulário de cep.
     document.querySelector('#adress').value=("");
     document.querySelector('#district').value=("");
@@ -183,7 +181,7 @@ if (!("erro" in conteudo)) {
 } //end if.
 else {
     //CEP não Encontrado.
-    limpa_formulário_cep();
+    limpa_formulario_cep();
     alert("CEP não encontrado.");
 }
 }
@@ -218,13 +216,13 @@ if (cep != "") {
     } //end if.
     else {
         //cep é inválido.
-        limpa_formulário_cep();
+        limpa_formulario_cep();
         alert("Formato de CEP inválido.");
     }
 } //end if.
 else {
     //cep sem valor, limpa formulário.
-    limpa_formulário_cep();
+    limpa_formulario_cep();
 }
 };
 
@@ -253,3 +251,7 @@ function TestaCPF(strCPF) {
     if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
     return true
 }
+
+// Mascara
+
+  //botoes

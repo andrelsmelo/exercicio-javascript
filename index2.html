@@ -2,7 +2,7 @@
 <html>
   <head>
     <title> Formulario </title>
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="./client/app.css">
   </head>
   <body>
     <div class="container">
@@ -13,7 +13,7 @@
           <input type="text" id="cpf" onkeyup="success1();"" name="CPF" placeholder="Digite seu CPF" required>
         
           <div class="btn-box">
-            <button type="buttton" id="firstNext" onclick="RegistroNome();TestaCPF(); return false" disabled = true > Proximo </button>
+            <button type="buttton" id="firstNext"> Proximo </button>
           </div>
       </form>
 
@@ -26,39 +26,32 @@
       
         <div class="btn-box">
          <button  type="button" id="back"> Voltar </button>
-          <button type="submit" id="finish" onclick="RegistroEndereco();DaysUntil();Cadastro(); return false" disabled = true> Finalizar </button>
+          <button type="button" id="finish"> Finalizar </button>
         </div>
       </form>
 
       <form id ="Form3">
         <h3> Fase Final</h3>
-        <label>Nome</label>
-          <input class="output" type="text" id="output-name" name="Nome" value="" disabled = true>
-        <label>CPF</label>
-          <input class="output" type="text" id="output-cpf" name="CPF" value="" disabled = true>
-        <label>Data de Nascimento</label>
-          <input class="output" type="text" id="output-birthdate" name="Data de Nascimento" value="" disabled = true>
-        <label>CEP</label>
-          <input class="output" type="text" id="output-cep" name="CEP"value="" disabled = true>
-        <label>Endereço</label> 
-          <input class="output" type="text" id="output-adress" name="Logradouro" value="" disabled = true>
-        <label>Numero</label>
-          <input class="output" type="text" id="output-number" name="Numero"value="" disabled = true>
-        <label>Bairro</label>
-          <input class="output" type="text" id="output-district" name="Bairro" value="" disabled = true>
-        <label>Dias até o aniversário</label>
-          <input class="output" type="text" id="output-days-until" name="Dias até o aniversario" value="" disabled = true>
+        <input type="text" id="output-name" name="Nome" >
+        <input type="text" id="output-cpf" name="CPF" >
+        <input type="text" id="output-birthdate" name="Data de Nascimento" >
+        <input type="text" id="output-cep" name="CEP">
+        <input type="text" id="output-adress" name="Logradouro" >
+        <input type="text" id="output-number" name="Numero">
+        <input type="text" id="output-district" name="Bairro" >
+        <input type="text" id="output-days-until" name="Dias até o aniversario" >
       </form>
 
       <div class="step-row">
         <div id="progress"></div>
-        <div class="step-col"><small> 1 </small></div>
-        <div class="step-col"><small> 2 </small></div>
-        <div class="step-col"><small> 3 </small></div>
+        <div class="step-col"><small> Dados </small></div>
+        <div class="step-col"><small> Endereço </small></div>
+        <div class="step-col"><small> Finalização </small></div>
       </div>
 
+     
     </div>
-    <script src="../src/script.js"></script>
+    <script src="./src/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
     
@@ -68,6 +61,34 @@
     $("#cep").mask("00.000-000");
     $("#number").mask("00000000");
     </script>
+
+
+<script>
+    var Form1 = document.getElementById("Form1");
+    var Form2 = document.getElementById("Form2");
+
+    var Next1 = document.getElementById("firstNext");
+    var Next2 = document.getElementById("finish");
+    var back = document.getElementById("back");
+    var progress = document.getElementById("progress");
+
+    Next1.onclick = function() {
+      Form1.style.left = "-450px";
+      Form2.style.left = "40px";
+      progress.style.width = "240px";
+    }
+
+    back.onclick = function() {
+      Form1.style.left = "40px";
+      Form2.style.left = "450px";
+      progress.style.width = "120px";
+    }
+    Next2.onclick = function() {
+      Form2.style.left = "-450px";
+      progress.style.width = "360px";
+    }
+
+</script>
     
   </body>
   </html>       
