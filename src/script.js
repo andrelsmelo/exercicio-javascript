@@ -149,7 +149,7 @@ function Cadastro(){
 
 // Habilitar botao proximo quando campo nao vazio
 
-function success1() {￼
+function success1() {
 
     if(document.querySelector('#name').value==="" || document.querySelector('#cpf').value==="" || document.querySelector('#date').value==="") { 
            document.querySelector('#firstNext').disabled = true; 
