@@ -4,14 +4,20 @@
     font-family: sans-serif;
 }
 
+body {
+    background-image: url(background.jpg);
+    background-position: center;
+}
+
+
 .container {
     width: 360px;
-    height: 400px;
+    height: 500px;
     margin: 8% auto;
     background: #fff;
     border-radius: 5px;
     position: relative;
-
+    overflow: hidden;
 }
 
 h3 {
@@ -27,21 +33,9 @@ h3 {
     left: 40px;
     bottom: 40px;
     transition: 0.5s;
-    overflow: hidden;
 }
 
 form input {
-    width: 100%;
-    padding: 10px 5px;
-    margin: 5px 0;
-    border: 0;
-    border-bottom: 1px solid #999;
-    outline: none;
-    background: transparent;
-
-}
-
-.teste123 {
     width: 100%;
     padding: 10px 5px;
     margin: 5px 0;
@@ -75,6 +69,7 @@ form button {
 }
 
 #Form1 {
+    text-align: center;
     right: 0px;
 }
 
@@ -82,13 +77,15 @@ form button {
     left: 450px;
 }
 #Form3 {
-    position: fixed;
+    left: 450px;
     border: #000;
     text-align: center;
 }
 
 .output {
     text-align: center;
+    padding: 0px;
+    font-size: 2;
 }
 
 .step-row {

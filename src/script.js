@@ -111,7 +111,7 @@ function CalculaIdade(bornday){
 
 function Cadastro(){
 
-    cadastro = { ...person, ...endereco, days_until }
+    cadastro = { ...person, ...endereco }
 
     let outputName = cadastro.name,
         outputCpf = cadastro.cpf,
@@ -120,7 +120,7 @@ function Cadastro(){
         outputAdress = cadastro.adress,
         outputNumber = cadastro.number,
         outputDistrict = cadastro.district,
-        outputDaysUntil = days_until;
+        outputDaysUntil = DaysUntil();
     
     //Armazenar Dados
     
@@ -251,7 +251,3 @@ function TestaCPF(strCPF) {
     if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
     return true
 }
-
-// Mascara
-
-  //botoes
