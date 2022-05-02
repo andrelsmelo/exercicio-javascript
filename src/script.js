@@ -28,7 +28,7 @@ function RegistroNome(){
 
      if(name !== '' && cpf !== '' && birthdate !== ''){
        person = new Person(name, cpf, birthdate)
-        console.log('Nova pessoa criada')
+        console.log('Dados Iniciais Registrados')
         document.querySelector('#firstNext').disabled = false;
     } else {
         console.log('Dados nao preenchidos')
@@ -113,6 +113,8 @@ function Cadastro(){
 
     cadastro = { ...person, ...endereco }
 
+    console.log(`Cadastro de ${person.name} criado`)
+
     let outputName = cadastro.name,
         outputCpf = cadastro.cpf,
         outputBirthdate = cadastro.birthdate,
@@ -150,17 +152,19 @@ function Cadastro(){
 function success1() {
 
     if(document.querySelector('#name').value==="" || document.querySelector('#cpf').value==="" || document.querySelector('#date').value==="") { 
-           document.querySelector('#firstNext').disabled = true; 
+           document.querySelector('#firstNext').disabled = true;
        } else { 
            document.querySelector('#firstNext').disabled = false;
+           console.log('Botão Habilitado');
        }
    }
 
 function success2() {
     if(document.querySelector('#cep').value==="" || document.querySelector('#adress').value==="" || document.querySelector('#district').value==="" || document.querySelector('#number').value==="") { 
-           document.querySelector('#finish').disabled = true; 
+           document.querySelector('#finish').disabled = true;
        } else { 
            document.querySelector('#finish').disabled = false;
+           console.log('Botão Habilitado');
        }
    }
 
@@ -212,6 +216,7 @@ if (cep != "") {
 
         //Insere script no documento e carrega o conteúdo.
         document.body.appendChild(script);
+        console.log('CEP Válido')
 
     } //end if.
     else {
@@ -249,5 +254,56 @@ function TestaCPF(strCPF) {
 
     if ((Resto == 10) || (Resto == 11))  Resto = 0;
     if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
-    return true
+    return true +
+    console.log('CPF Válido')
+}
+
+// Botoes
+
+var Form1 = document.getElementById("Form1");
+var Form2 = document.getElementById("Form2");
+var Form3 = document.getElementById("Form3")
+
+var Next1 = document.getElementById("firstNext");
+var Next2 = document.getElementById("finish");
+var back = document.getElementById("back");
+var back2 = document.getElementById("back2");
+var progress = document.getElementById("progress");
+
+Next1.onclick = function() {
+ 
+  if(TestaCPF() === false) {
+    alert('CPF Invalido');
+  } else {
+    Form1.style.left = "-450px";
+    Form2.style.left = "40px";
+    progress.style.width = "240px";
+    RegistroNome();
+  }
+  
+ return false
+}
+
+Next2.onclick = function() {
+  Form2.style.left = "-450px";
+  Form3.style.left = "40px";
+  progress.style.width = "360px";
+
+  RegistroEndereco();
+  Cadastro();
+  return false
+}
+
+back.onclick = function() {
+  Form1.style.left = "40px";
+  Form2.style.left = "450px";
+  progress.style.width = "120px";
+  return false
+}
+
+back1.onclick = function() {
+  Form2.style.left = "40px";
+  Form3.style.left = "450px";
+  progress.style.width = "240px";
+  return false
 }
