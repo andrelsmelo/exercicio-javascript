@@ -1,3 +1,6 @@
+//fullPerson = {};
+//fullAdress = {};
+
 // Dados Cliente
 
 class Person {
@@ -21,38 +24,36 @@ class Adress {
 
 // Registro Dados do cliente via Front
 
-function RegistroNome(){
-    var name = document.querySelector('#name').value,
-        cpf = document.querySelector('#cpf').value,
-        birthdate = document.querySelector('#date').value
+function RegisterName(){
+    const name = document.querySelector('#name').value;
+    const cpf = document.querySelector('#cpf').value;
+    const birthdate = document.querySelector('#date').value;
 
-     if(name !== '' && cpf !== '' && birthdate !== ''){
-       person = new Person(name, cpf, birthdate)
+    if(name !== '' && cpf !== '' && birthdate !== ''){
+        fullPerson = new Person(name, cpf, birthdate)
         console.log('Dados Iniciais Registrados')
         document.querySelector('#firstNext').disabled = false;
-    } else {
-        console.log('Dados nao preenchidos')
-    };
-
-    ;
+        return true;
+    }
+    console.log('Dados nao preenchidos');
 }
 
 
 // Registro Endereço do cliente via Front
 
-function RegistroEndereco(){
-    var cep = document.querySelector('#cep').value,
-        adress = document.querySelector('#adress').value,
-        district = document.querySelector('#district').value
-        number = document.querySelector('#number').value
+function RegisterAdress(){
+    const cep = document.querySelector('#cep').value;
+    const adress = document.querySelector('#adress').value;
+    const district = document.querySelector('#district').value;
+    const number = document.querySelector('#number').value;
 
      if(cep !== '' && adress !== '' && district !== '' && number !== ''){
-        endereco = new Adress(cep,adress,district,number)
-        console.log('Endereco cadastrado')
+        fullAdress = new Adress(cep,adress,district,number)
+        console.log('Endereco cadastrado');
         document.querySelector('#finish').disabled = false;
-    } else {
-        console.log('Dados nao preenchidos')
-    };
+        return true;
+    }
+    console.log('Dados nao preenchidos')
 }
 
 
@@ -63,15 +64,20 @@ function formatDate (date) {
 }
 
 function DaysUntil(){
+    var date = fullPerson.birthdate;
+    var dateFormat = formatDate(date);
+    var bornday = new Date(dateFormat);
+    var today = new Date();
+    var age = CalculateAge(bornday) + 1;
+    var nextYearBday = bornday.getFullYear()+age;
+    var bday = new Date(`${bornday.getMonth()+1}/${bornday.getDate()}/${nextYearBday}`);
+    var diff = bday.getTime() - today.getTime();
+    var days = Math.round(diff/(1000* 3600 * 24));
+    return days;
+}
 
-var date = person.birthdate;
-var dateFormat = formatDate(date);
-
-var bornday = new Date(dateFormat);
-var today = new Date();
-
-function CalculaIdade(bornday){ 
-    var actual_date = new Date();
+function CalculateAge(bornday){ 
+    var today = new Date();
     var actual_year = today.getFullYear();
     var bornday_day = bornday.getDate();
     var bornday_month = bornday.getMonth();
@@ -80,76 +86,63 @@ function CalculaIdade(bornday){
     var actual_month = today.getMonth() + 1; 
     //Se mes atual for menor que o nascimento, nao fez aniversario ainda;  
     if(actual_month < bornday_month){
-    age--; 
+        age--; 
     } else {
-    //Se estiver no mes do nascimento, verificar o dia
-    if(actual_month == bornday_month){ 
-    if(new Date().getDate() < bornday_day ){ 
-    //Se a data atual for menor que o dia de nascimento ele ainda nao fez aniversario
-    age--; 
+        //Se estiver no mes do nascimento, verificar o dia
+        if(actual_month == bornday_month){ 
+            if(new Date().getDate() < bornday_day ){ 
+                //Se a data atual for menor que o dia de nascimento ele ainda nao fez aniversario
+                age--; 
+            }
+        }
     }
-    }
-    } 
     return age; 
-   }
-
-
-    var age = CalculaIdade(bornday) + 1;
-
-    var nextYearBday = bornday.getFullYear()+age;
-
-    var bday = new Date(`${bornday.getMonth()+1}/${bornday.getDate()}/${nextYearBday}`);
-
-
-    var diff = bday.getTime() - today.getTime();
-
-    var days = Math.round(diff/(1000* 3600 * 24));
-
-    return days_until = days
 }
 // Fechar Cadastro
 
-function Cadastro(){
+function FullRegister(){
 
-    cadastro = { ...person, ...endereco }
+    const fullRegister = { ...fullPerson, ...fullAdress }
 
-    console.log(`Cadastro de ${person.name} criado`)
+    console.log(`Cadastro de ${fullPerson.name} criado`)
 
-    let outputName = cadastro.name,
-        outputCpf = cadastro.cpf,
-        outputBirthdate = cadastro.birthdate,
-        outputCep = cadastro.cep,
-        outputAdress = cadastro.adress,
-        outputNumber = cadastro.number,
-        outputDistrict = cadastro.district,
-        outputDaysUntil = DaysUntil();
-    
+    let outputName = fullRegister.name;
+    let outputCpf = fullRegister.cpf;
+    let outputBirthdate = fullRegister.birthdate;
+    let outputCep = fullRegister.cep;
+    let outputAdress = fullRegister.adress;
+    let outputNumber = fullRegister.number;
+    let outputDistrict = fullRegister.district;
+    let outputDaysUntil = DaysUntil();
+
     //Armazenar Dados
-    
-        sessionStorage.setItem("name",`${cadastro.name}`),
-        sessionStorage.setItem("cpf",`${cadastro.cpf}`),
-        sessionStorage.setItem("birthdate",`${cadastro.birthdate}`),
-        sessionStorage.setItem("cep",`${cadastro.cep}`),
-        sessionStorage.setItem("adress",`${cadastro.adress}`),
-        sessionStorage.setItem("number",`${cadastro.number}`),
-        sessionStorage.setItem("distric",`${cadastro.district}`),
-        sessionStorage.setItem("diffDays",`${days_until}`);
+
+    sessionStorage.setItem("name",`${fullRegister.name}`),
+    sessionStorage.setItem("cpf",`${fullRegister.cpf}`),
+    sessionStorage.setItem("birthdate",`${fullRegister.birthdate}`),
+    sessionStorage.setItem("cep",`${fullRegister.cep}`),
+    sessionStorage.setItem("adress",`${fullRegister.adress}`),
+    sessionStorage.setItem("number",`${fullRegister.number}`),
+    sessionStorage.setItem("distric",`${fullRegister.district}`),
+    sessionStorage.setItem("diffDays",`${outputDaysUntil}`);
 
     //Envio De Dados HTML
-        document.getElementById('output-name').value = outputName
-        document.getElementById('output-cpf').value = outputCpf
-        document.getElementById('output-birthdate').value = outputBirthdate
-        document.getElementById('output-cep').value = outputCep
-        document.getElementById('output-adress').value = outputAdress
-        document.getElementById('output-number').value = outputNumber
-        document.getElementById('output-district').value = outputDistrict
-        document.getElementById('output-days-until').value = days_until
-    
+    document.getElementById('output-name').value = outputName
+    document.getElementById('output-cpf').value = outputCpf
+    document.getElementById('output-birthdate').value = outputBirthdate
+    document.getElementById('output-cep').value = outputCep
+    document.getElementById('output-adress').value = outputAdress
+    document.getElementById('output-number').value = outputNumber
+    document.getElementById('output-district').value = outputDistrict
+    document.getElementById('output-days-until').value = outputDaysUntil
+
+    return fullRegister;
+
 }
 
 // Habilitar botao proximo quando campo nao estiver vazio
 
-function success1() {
+function Success1() {
 
     if(document.querySelector('#name').value==="" ||
         document.querySelector('#cpf').value==="" ||
@@ -157,7 +150,7 @@ function success1() {
             document.querySelector('#firstNext').disabled = true;
             return 
         }
-    if(TestaCPF() === true){  
+    if(TestCPF() === true){  
         document.querySelector('#firstNext').disabled = false;
         console.log('Botão Habilitado');
         document.getElementById("cpf").className = "has-success";
@@ -169,14 +162,17 @@ function success1() {
     }
 }
 
-function success2() {
-    if(document.querySelector('#cep').value==="" || document.querySelector('#adress').value==="" || document.querySelector('#district').value==="" || document.querySelector('#number').value==="") { 
-           document.querySelector('#finish').disabled = true;
-       } else { 
-           document.querySelector('#finish').disabled = false;
-           console.log('Botão Habilitado');
-       }
-   }
+function Success2() {
+    if(document.querySelector('#cep').value==="" ||
+        document.querySelector('#adress').value==="" ||
+        document.querySelector('#district').value==="" ||
+        document.querySelector('#number').value===""){
+            document.querySelector('#finish').disabled = true;
+    } else { 
+        document.querySelector('#finish').disabled = false;
+        console.log('Botão Habilitado');
+    }
+}
 
 //Verifica CEP, API Via CEP
 
@@ -244,7 +240,7 @@ else {
 
 //validação CPF
 
-function TestaCPF(strCPF) {
+function TestCPF(strCPF) {
     
     var strCPF = document.querySelector('#cpf').value.replace(/\D/g,''); 
     var Soma;
@@ -263,7 +259,9 @@ function TestaCPF(strCPF) {
     Resto = (Soma * 10) % 11;
 
     if ((Resto == 10) || (Resto == 11))  Resto = 0;
-    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) )return false;
+
+    console.log('CPF Válido')
     return true
 }
 
@@ -280,7 +278,7 @@ var back2 = document.getElementById("back2");
 var progress = document.getElementById("progress");
 
 Next1.onclick = function() {
-    RegistroNome();
+    RegisterName();
     Form1.style.left = "-450px";
     Form2.style.left = "40px";
     progress.style.width = "240px";
@@ -291,9 +289,8 @@ Next2.onclick = function() {
   Form2.style.left = "-450px";
   Form3.style.left = "40px";
   progress.style.width = "360px";
-
-  RegistroEndereco();
-  Cadastro();
+  RegisterAdress();
+  FullRegister(fullPerson, fullAdress);
   return false
 }
 

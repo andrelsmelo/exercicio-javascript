@@ -132,5 +132,6 @@ form button {
 }
 
 #alert {
+    font-size: smaller;
     color: red;
 }
