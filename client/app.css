@@ -122,3 +122,15 @@ form button {
     top: 0;
     border-left: 20px solid #999;
 }
+
+.has-success {
+    border-bottom: 1px solid #999;
+}
+
+.has-error {
+    border-bottom: 1px solid red;
+}
+
+#alert {
+    color: red;
+}

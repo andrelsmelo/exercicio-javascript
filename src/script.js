@@ -151,13 +151,23 @@ function Cadastro(){
 
 function success1() {
 
-    if(document.querySelector('#name').value==="" || document.querySelector('#cpf').value==="" || document.querySelector('#date').value==="") { 
-           document.querySelector('#firstNext').disabled = true;
-       } else { 
-           document.querySelector('#firstNext').disabled = false;
-           console.log('Botão Habilitado');
-       }
-   }
+    if(document.querySelector('#name').value==="" ||
+        document.querySelector('#cpf').value==="" ||
+        document.querySelector('#date').value==="" ){ 
+            document.querySelector('#firstNext').disabled = true;
+            return 
+        }
+    if(TestaCPF() === true){  
+        document.querySelector('#firstNext').disabled = false;
+        console.log('Botão Habilitado');
+        document.getElementById("cpf").className = "has-success";
+        document.getElementById("alert").innerHTML = ""
+        return 
+    } else {
+        document.getElementById("alert").innerHTML = "CPF Inválido"
+        document.getElementById("cpf").className = "has-error";
+    }
+}
 
 function success2() {
     if(document.querySelector('#cep').value==="" || document.querySelector('#adress').value==="" || document.querySelector('#district').value==="" || document.querySelector('#number').value==="") { 
@@ -236,7 +246,7 @@ else {
 
 function TestaCPF(strCPF) {
     
-    var strCPF = person.cpf.replace(/\D/g,''); 
+    var strCPF = document.querySelector('#cpf').value.replace(/\D/g,''); 
     var Soma;
     var Resto;
     Soma = 0;
@@ -254,8 +264,7 @@ function TestaCPF(strCPF) {
 
     if ((Resto == 10) || (Resto == 11))  Resto = 0;
     if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
-    return true +
-    console.log('CPF Válido')
+    return true
 }
 
 // Botoes
@@ -271,18 +280,12 @@ var back2 = document.getElementById("back2");
 var progress = document.getElementById("progress");
 
 Next1.onclick = function() {
- 
-  if(TestaCPF() === false) {
-    alert('CPF Invalido');
-  } else {
+    RegistroNome();
     Form1.style.left = "-450px";
     Form2.style.left = "40px";
     progress.style.width = "240px";
-    RegistroNome();
+    return false
   }
-  
- return false
-}
 
 Next2.onclick = function() {
   Form2.style.left = "-450px";
